@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive Marker Map</title>
+  <link rel="stylesheet" href="site-files/styles.css" />
+</head>
+<body>
+  <header class="legend-bar" aria-label="Map key">
+    <strong class="legend-title">Map key</strong>
+    <div class="legend-items">
+      <span><strong>A1-3 / B1-3 / C1-3:</strong> zone 3 checkpoints</span>
+      <span><strong>01-24:</strong> zone 2 checkpoints</span>
+      <span><strong>X:</strong> zone 1 checkpoints</span>
+      <span><strong>N, NE, SE, S, NW, SW:</strong> zone 1 tags</span>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="map-card" aria-label="Interactive map">
+      <div id="map" class="map-stage">
+        <img src="site-files/map.png" alt="Map" class="map-image" draggable="false" />
+        <div id="direction-layer" class="marker-layer" aria-hidden="true"></div>
+        <div id="marker-layer" class="marker-layer"></div>
+      </div>
+    </section>
+
+    <aside class="editor-card" aria-label="Marker editor">
+      <h1>Marker editor</h1>
+      <p class="hint">Click a colored marker on the map. Its position stays fixed; only its text and color can be changed.</p>
+
+      <div id="empty-state" class="empty-state">Select a marker to edit it.</div>
+
+      <form id="editor-form" class="editor-form" hidden>
+        <div class="selected-row">
+          <span>Selected</span>
+          <strong id="selected-id"></strong>
+        </div>
+
+        <label>
+          Marker text
+          <input id="marker-text" type="text" maxlength="5" autocomplete="off" />
+        </label>
+
+        <label>
+          Marker color
+          <input id="marker-color" type="color" />
+        </label>
+
+        <div class="palette" aria-label="Quick colors">
+          <button type="button" class="swatch" data-color="#ffbd59" style="--swatch:#ffbd59" aria-label="Orange"></button>
+          <button type="button" class="swatch" data-color="#ff3131" style="--swatch:#ff3131" aria-label="Red"></button>
+          <button type="button" class="swatch" data-color="#004fff" style="--swatch:#004fff" aria-label="Blue"></button>
+          <button type="button" class="swatch" data-color="#20a464" style="--swatch:#20a464" aria-label="Green"></button>
+          <button type="button" class="swatch" data-color="#c86ae8" style="--swatch:#c86ae8" aria-label="Purple"></button>
+        </div>
+
+        <button id="reset-marker" type="button" class="secondary-button">Reset selected marker</button>
+      </form>
+
+      <div class="editor-actions">
+        <button id="download-map" type="button" class="primary-button">Download map as PNG</button>
+        <button id="reset-all" type="button" class="secondary-button">Reset all markers</button>
+        <p id="download-status" class="download-status" aria-live="polite"></p>
+      </div>
+
+      <p class="storage-note">Changes are saved in this browser with localStorage. Downloading creates a PNG snapshot of the current map, including all marker text and colors.</p>
+    </aside>
+  </main>
+
+  <script src="site-files/app.js"></script>
+</body>
+</html>
